@@ -8,7 +8,7 @@ NFT digital art is becoming increasingly popular. This web application will be a
 **Homepage**
 Landing page for user. Basic profile details. List of NFT galleries user has created.
 
-![Homepage](/images/UserHomepage.drawio.png)
+![Homepage](/images/UserHomepage.drawio-3.png)
 
 **New Gallery**
 This page will allow users to create a new gallery, add NFT's to said gallery, and style the gallery and NFT cards holding each NFT.
@@ -20,11 +20,11 @@ This page allows users to view how their gallery will appear once public.
 
 **Public Gallery**
 This page will list published galleries and can be ordered by date created or popularity of each gallery.
-![Main Public Gallery](/images/MainPublicGallery.drawio.png)
+![Main Public Gallery](/images/MainPublicGalleryView.drawio.png)
 
 ## Data Model
 Database models will consist of the following: Users, NFT Post, Gallery, and Followers. Relationships between model fields are described below:
-![Database](/images/Database.drawio.png)
+![Database](/images/DatabaseModels.png)
 
 ## Schedule
 **Week 1 - Ending January 28**
