@@ -1,0 +1,38 @@
+{% extends 'base.html' %} {% load static %} 
+
+{% block content %} 
+
+
+
+<div class="row col-12 d-flex justify-content-center">
+    <h1 class="homepagetitle d-flex justify-content-center">
+       
+        <span style="font-size: 3.2rem; color: rgb(231, 114, 208); margin-top: 15px;"
+          >{{user.username}}</span
+        >
+      
+      </h1>
+    <div class="pt-3 d-flex justify-content-center">
+        <img
+          src="{% static user.avatar.url %}"
+          alt="{{user.username}}'s avatar"
+          class="rounded-circle shadow"
+          height="300"
+          width="275"
+        />
+      </div>
+
+
+    <div class="col-lg-4" style="margin-top: 50px; width: 350px;">
+        <form action="{% url 'users_app:update' user.username %}" style="font-weight: bolder;" enctype='multipart/form-data' method='POST' class='d-flex flex-column gap-2'>
+            {% csrf_token %}
+            {{form}}
+            <button type="submit" class="btn btn-dark register-button mt-4" style="width: 100px;"> Update </button>
+        </form>
+    </div>
+
+</div>
+
+
+
+{% endblock content %}

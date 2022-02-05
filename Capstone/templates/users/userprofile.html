@@ -1,0 +1,145 @@
+{% extends 'base.html' %} {% load static %} {% block content %} 
+
+{% if request.user == user %}
+<h1 class="homepagetitle mt-4 mb-5 d-flex justify-content-center align-items-center" style="font-size: 2.4rem; color: rgb(231, 114, 208);">
+  Hello&nbsp
+  <span style="font-size: 2.4rem; color: rgb(231, 114, 208);"
+    >{{user.username}}&nbsp<i class="far fa-hand-paper" style="font-size: 2.4rem; color: rgb(231, 114, 208);"></i></span
+  >
+</h1>
+{% endif %}
+
+
+<div class="row col-12">
+  <div class="col-lg-6">
+    <div class="pt-3 profile-image">
+      <img
+        src="{% static user.avatar.url %}"
+        alt="{{user.username}}'s avatar"
+        class="rounded-circle shadow"
+        height="300"
+        width="275"
+      />
+    </div>
+    {% if request.user == user %}
+    <span>
+      <div class="editicon">
+        <a
+          href="{% url 'users_app:update' user.username %}"
+          style="
+            color: rgb(226, 81, 197);
+            -webkit-text-stroke: 1px black;
+            text-decoration: none;
+          "
+        >
+          <i class="fas fa-user-edit"></i>
+        </a>
+      </div>
+    </span>
+    {% endif %}
+
+    <!-- 'users_app:update' user.username -->
+
+    <table class="table profile-margin">
+      <tbody>
+        {% if request.user == user %}
+        <tr>
+          <th scope="row"></th>
+          <td>Name:</td>
+          <td>{{user.first_name}} {{user.last_name}}</td>
+        </tr>
+
+        <tr>
+          <th scope="row"></th>
+          <td>Email:</td>
+          <td>{{user.email}}</td>
+        </tr>
+        {% endif %}
+        <tr>
+          <th scope="row"></th>
+          <td>Username:</td>
+          <td>{{user.username}}</td>
+        </tr>
+
+        <tr>
+          <th scope="row"></th>
+          <td>Profile created:</td>
+          <td>{{user.date_joined|date}}</td>
+        </tr>
+
+        <tr>
+          <th scope="row"></th>
+          <td>Galleries:</td>
+          <td>0</td>
+        </tr>
+
+        <tr>
+          <th scope="row"></th>
+          <td>Followers:</td>
+          <td>0</td>
+        </tr>
+
+        <tr>
+          <th scope="row"></th>
+          <td>Following:</td>
+          <td>0</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-lg-6">
+    {% if request.user.is_authenticated %}
+
+
+      <h3 class=" d-flex homepagetitle" style="justify-content:center; margin-top: 30px; margin-bottom: 0px; padding:10px; height: 75px; font-size: 2.2rem; color: rgb(231, 114, 208);">
+        <i><a class="homepagetitle far fa-plus-square" href="{% url 'gallery_app:newgallery' user.username %}" style="text-decoration: none; font-size: 2.2rem; color: rgb(231, 114, 208); position:relative; left: -70px; font-size: 2rem;"></i></a>
+           Your Galleries:
+      </h3>
+
+
+   
+
+    {% else %}
+    <h3 class=" d-flex justify-content-center homepagetitle" style="margin-top: 30px; margin-bottom: 0px; padding:10px; height: 75px; font-size: 2.2rem; color: rgb(231, 114, 208);">
+        {{user.username}}'s Galleries:
+    </h3>
+
+    {% endif %}
+
+    
+
+    <div class='user-galleries d-flex justify-content-center'  style="background-color: rgb(247, 229, 243); border-radius: 8px;">
+
+      <div class="gallery-posts py-3">
+        <table class="table profile-margin" style="color:rgb(231, 114, 208); font-weight: bolder;">
+          <tbody>
+
+
+    {% for gallery in user.newgallery.all %}
+
+    
+
+    <tr>
+      <th scope="row"></th>
+      <td>{{ gallery.gallery_name }}</td>
+      <td>NFT's: 0</td>
+    </tr>
+        
+    {% endfor %}
+
+         
+      </tbody>
+        </table>
+      </div>
+
+      </div>
+        
+    </div>
+
+
+
+  </div>
+</div>
+
+{% endblock content %}

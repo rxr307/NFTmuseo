@@ -1,0 +1,29 @@
+{% extends 'base.html' %} {% load static %} 
+
+{% block content %}
+
+<div class="loginwrapper">
+  <form
+    action="{% url 'users_app:login' %}"
+    method="POST"
+    class="user-registration"
+  >
+    <fieldset>
+      <label for="id_username"> {{form.username.label}}</label>
+      {{form.username}}
+    </fieldset>
+
+    <fieldset>
+      <label for="id_password"> {{form.password.label}}</label>
+      {{form.password}}
+    </fieldset>
+
+    {% csrf_token %}
+
+    <button type="submit" class="btn btn-light register-button mt-4">
+      Login
+    </button>
+  </form>
+</div>
+
+{% endblock content %}
