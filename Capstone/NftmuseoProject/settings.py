@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users_app',
     'gallery_app',
-    'djmoney',
+
 
 ]
 
@@ -135,3 +135,5 @@ AUTH_USER_MODEL = 'users_app.User'
 ## where user goes if not logged in
 
 LOGIN_URL = '/users/login'
+
+CSRF_TRUSTED_ORIGINS = ['https://*.mydomain.com','http://*.127.0.0.1']

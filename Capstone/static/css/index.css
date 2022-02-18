@@ -11,9 +11,7 @@
   background-size: cover;
 }
 
-.nav-hover {
-  border-radius: 50%;
-}
+
 
 .bell {
   margin-left: 10px;
@@ -22,6 +20,7 @@
 .nav-hover:hover {
   background-color: rgb(238, 230, 235);
 }
+
 
 .loged-in-background {
   background-color: white;
@@ -37,6 +36,8 @@
   height: 800px;
   width: auto;
   overflow-y: scroll;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .profile-image {
@@ -95,7 +96,12 @@
 }
 
 .profile-margin {
-  margin-top: 30px;
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+
+.user-galleries {
+  margin-bottom: 20px;
 }
 
 label {
@@ -144,3 +150,94 @@ ul li {
   opacity: 1;
   visibility: visible;
 }
+
+.zoom-box {
+  transition: transform .7s;
+}
+
+.zoom-box:hover {
+  transform: scale(1.2);
+}
+
+.wave {
+  animation-name: wave-animation;  
+  animation-duration: 2s;        
+  animation-iteration-count: 2; 
+  transform-origin: 70% 70%;   
+  display: inline-block;
+}
+
+@keyframes wave-animation {
+    0% { transform: rotate( 0.0deg) }
+   10% { transform: rotate(14.0deg) }  
+   40% { transform: rotate(-4.0deg) }
+   50% { transform: rotate(10.0deg) }
+   60% { transform: rotate( 0.0deg) }  
+  100% { transform: rotate( 0.0deg) }
+}
+
+.alert {
+
+  width: fit-content;
+}
+
+
+
+@import url(https://fonts.googleapis.com/css?family=Amatic+SC);
+
+.museum-page {
+	color:rgb(231, 114, 208);
+}
+
+p {
+	font-size: 2.5em;
+	display: table-cell; 
+	vertical-align: middle;
+	text-align: center;
+	opacity: 0;
+}
+
+.text{
+  bottom: 300px;
+	top: 130px; 
+	left: 30px; 
+	width:fit-content;
+	height:fit-content;
+	position:fixed;
+	display: table;
+}
+
+.t1{
+	animation: t-animation 3s;
+}
+
+
+@keyframes t-animation {
+	0% {opacity: 0;}
+	30% {opacity: 1;}
+	70% {opacity: 1;}
+	100% {opacity: 0;}
+}
+
+@keyframes end-animation {
+	0% {opacity: 0;}
+	100% {opacity: 1;}
+}
+
+.gallery-title-container {
+  display: flex;
+  justify-content: center;
+}
+
+
+.trash-cans {
+  display: flex;
+  justify-content:center;
+  background-color: none;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+}
+

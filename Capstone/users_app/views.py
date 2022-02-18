@@ -1,7 +1,9 @@
+from multiprocessing import context
 from django.contrib import auth
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.http import HttpResponse
+from gallery_app.models import NewGallery, NewNFT
 from .forms import UserAuthForm, UserForm
 from django.contrib.auth import (authenticate, get_user_model,
 login as django_login,
@@ -99,10 +101,25 @@ def login(request):
 @login_required
 def userprofile(request, username):
     # find the user that just logged in
+
+
     user = get_object_or_404(get_user_model(), username=username)
 
+    user_galleries = NewGallery.objects.filter(user=user).order_by('-created_date')
 
-    return render(request, 'users/userprofile.html', {'user': user})
+    gallery_count = NewGallery.objects.filter(user=user)
+    number_of_galleries = 0
+    for gallery in gallery_count:
+        if gallery.newnft.count() > 0:
+            number_of_galleries += 1
+
+    context = {
+        'user':user,
+        'number_of_galleries': number_of_galleries,
+        'user_galleries': user_galleries,
+    }
+
+    return render(request, 'users/userprofile.html', context)
 
 def logout(request):
     django_logout(request)

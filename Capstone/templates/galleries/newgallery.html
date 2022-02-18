@@ -17,8 +17,8 @@
 <div class="row mb-3 d-flex justify-content-center">
   
     <div class="col-lg-4 col-med-8 col-sm-8 text-primary" style="height: fit-content;">
-
-      <form action="{% url 'gallery_app:newgallery' user.username %}" style="font-weight: bolder;" enctype='multipart/form-data' method='POST' class='gap-2'>
+      
+      <form action="{% url 'gallery_app:creategallery' user.username  %} " style="font-weight: bolder;" enctype='multipart/form-data' method='POST' class='gap-2'>
      
         {% csrf_token %}
 
@@ -37,7 +37,7 @@
 
           <label>Wallett Address</label>   
           
-          <span class="hovertext" style="color: rgb(231, 114, 208); font-weight: normal;" data-hover="You will be adding NFT's from this wallet">?</span>
+          <span class="hovertext" style="color: rgb(231, 114, 208); font-weight: normal;" data-hover="You will be adding NFT's from this wallet. Max wallet size: 50 NFT's">?</span>
           {{form.wallett_address}}
       </div>
 
@@ -61,9 +61,6 @@
           Add NFT's &nbsp <i class="far fa-arrow-alt-circle-right"></i>
         </button>
       
-    
-        </a>
-
 
 
     </form>

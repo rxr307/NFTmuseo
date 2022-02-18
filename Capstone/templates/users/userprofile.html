@@ -4,7 +4,7 @@
 <h1 class="homepagetitle mt-4 mb-5 d-flex justify-content-center align-items-center" style="font-size: 2.4rem; color: rgb(231, 114, 208);">
   Hello&nbsp
   <span style="font-size: 2.4rem; color: rgb(231, 114, 208);"
-    >{{user.username}}&nbsp<i class="far fa-hand-paper" style="font-size: 2.4rem; color: rgb(231, 114, 208);"></i></span
+    >{{user.username}}&nbsp&nbsp<i class="wave far fa-hand-paper" style="font-size: 2.4rem; color: rgb(231, 114, 208);"></i></span
   >
 </h1>
 {% endif %}
@@ -12,7 +12,7 @@
 
 <div class="row col-12">
   <div class="col-lg-6">
-    <div class="pt-3 profile-image">
+    <div class="pt-3 mt-4 profile-image">
       <img
         src="{% static user.avatar.url %}"
         alt="{{user.username}}'s avatar"
@@ -70,7 +70,7 @@
         <tr>
           <th scope="row"></th>
           <td>Galleries:</td>
-          <td>0</td>
+          <td>{{number_of_galleries}}</td>
         </tr>
 
         <tr>
@@ -89,11 +89,11 @@
   </div>
 
   <div class="col-lg-6">
-    {% if request.user.is_authenticated %}
+    {% if request.user == user %}
 
 
       <h3 class=" d-flex homepagetitle" style="justify-content:center; margin-top: 30px; margin-bottom: 0px; padding:10px; height: 75px; font-size: 2.2rem; color: rgb(231, 114, 208);">
-        <i><a class="homepagetitle far fa-plus-square" href="{% url 'gallery_app:newgallery' user.username %}" style="text-decoration: none; font-size: 2.2rem; color: rgb(231, 114, 208); position:relative; left: -70px; font-size: 2rem;"></i></a>
+        <i><a class="zoom-box homepagetitle far fa-plus-square" href="{% url 'gallery_app:creategallery' user.username %}" style="text-decoration: none; font-size: 2.2rem; color: rgb(231, 114, 208); position:relative; left: -70px; font-size: 2rem;"></i></a>
            Your Galleries:
       </h3>
 
@@ -107,34 +107,73 @@
 
     {% endif %}
 
-    
+    <div class="gallery-title-container" style="border-radius: 5px; background-color: #212529; color: rgb(231, 114, 208)">
+      <div class="m-3">
 
-    <div class='user-galleries d-flex justify-content-center'  style="background-color: rgb(247, 229, 243); border-radius: 8px;">
+        Title
+      </div>
+      <div class="m-3">
 
-      <div class="gallery-posts py-3">
+        <i class="far fa-arrow-alt-circle-right"></i>  
+      </div>
+      <div class="m-3">
+
+        Created
+      </div>
+      <div class="m-3">
+
+      <i class="far fa-arrow-alt-circle-right"></i>   
+      </div>
+
+      <div class="m-3">
+        NFT's
+      </div>
+      
+    </div>
+
+
+    <div class='user-galleries'  style="background-color: rgb(247, 229, 243); border-radius: 8px;">
+
+      <div class="gallery-posts mt-0">
+
+     
+
+
         <table class="table profile-margin" style="color:rgb(231, 114, 208); font-weight: bolder;">
           <tbody>
 
 
-    {% for gallery in user.newgallery.all %}
-
+    {% for gallery in user_galleries %}
+      {% if gallery.newnft.count > 0 %}
     
 
     <tr>
-      <th scope="row"></th>
-      <td>{{ gallery.gallery_name }}</td>
-      <td>NFT's: 0</td>
-    </tr>
+  
+      <th scope="row">
+        <td><a href="{% url 'gallery_app:galleryview' gallery.user gallery.id %}" >{{gallery.gallery_name}}</a></td>
+        <td>{{gallery.created_date|date:'m-d-Y'}}</td>
         
+              
+      <td>{{gallery.newnft.count}}</td>
+      {% if gallery.user == request.user %}
+      <td> <a class="nav-link active fa-solid fa-trash-can" style="padding-top: 3px; font-size: 20px;" href="{% url 'gallery_app:delete' gallery.id %}"></a></td>
+      </th>
+
+
+  {% endif %}
+  {% endif %}
+    
+
     {% endfor %}
 
+   </tr>
          
       </tbody>
         </table>
       </div>
 
       </div>
-        
+
     </div>
 
 
@@ -143,3 +182,7 @@
 </div>
 
 {% endblock content %}
+
+
+
+

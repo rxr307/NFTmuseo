@@ -4,3 +4,4 @@ from django.contrib.auth.admin import UserAdmin
 from .models import NewNFT, NewGallery
 
 admin.site.register(NewGallery)
+admin.site.register(NewNFT)

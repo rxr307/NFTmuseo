@@ -1,0 +1,83 @@
+
+
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<div class="row">
+
+  <div class="col-lg-12 museum-page">
+
+    <div class="text flicker homepagetitle"><p class="t1">Enjoy the museum!</p></div>
+  
+  </div>
+
+</div>
+
+<div class="row mb-3 mt-3 d-flex justify-content-center align-items-center">
+
+    <div class="col-lg-12 col-sm-12 text-primary d-flex justify-content-center align-items-center">
+
+        
+          <form action="{% url 'users_app:login' %}" method= "POST">
+            <label class="m-3">Filter museum by category:</label>
+              {% csrf_token %}
+              {{form.filter_museum}}
+  
+              <div class="d-flex justify-content-center align-items-center">
+              <span><button class="btn btn-primary mt-3 mb-2" style="border: none; color:rgb(210, 99, 188); background-color:#444446">Submit</button></span>
+            </div>
+          </form>
+    </div>
+
+  </div>
+
+
+
+
+
+<div class="row mt-4 mb-3">
+    <div class="col-lg-12 col-sm-12 text-primary">
+      <div class="d-flex flex-wrap">
+  
+       
+
+  
+        {% for gallery in list_of_filtered_galleries %}
+        
+        <div class="card text-center m-3"  style="width: 33rem; color:rgb(210, 99, 188); border: solid rgb(231, 182, 221);">
+            <div class="card-header" style="background-color: rgb(247, 229, 243);">
+              <h3 class="card-title"  style="color:rgb(210, 99, 188); font-weight:bolder; padding: 10px; margin-bottom:0px; padding-bottom: 0px; border-radius: 5px;">{{gallery.gallery_name}}</h3>       
+              <h5 style="padding-bottom: 10px; font-size: 1rem;">{{gallery.newnft.count}} NFT's</h5>      
+            </div>
+            <div class="card-body">
+              <div class="curated">
+                Curated by: <a href="{% url 'users_app:userprofile' gallery.user %}">{{gallery.user}}</a>
+              </div>
+              <img
+              class="card-img"
+              style="height: 100px; width: 100px; margin-bottom: 10px;"
+              src="{% static gallery.user.avatar.url %}"
+              alt="museum-gallery-image"
+            />
+              <p> </p>
+              <a href="{% url 'gallery_app:galleryview' gallery.user gallery.id %}" class="btn btn-primary mt-2" style="border: none; color:rgb(210, 99, 188); background-color:#444446" >View Gallery</a>
+            </div>
+            <div class="card-footer" style="color:rgb(210, 99, 188); background-color: rgb(247, 229, 243);">
+             {{gallery.created_date|date:'m-d-Y'}}
+            </div>
+          </div>
+  
+        {% endfor %}
+  
+  
+     
+  
+  
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
+
+
+
+
