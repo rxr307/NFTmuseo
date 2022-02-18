@@ -11,8 +11,6 @@
   background-size: cover;
 }
 
-
-
 .bell {
   margin-left: 10px;
 }
@@ -20,7 +18,6 @@
 .nav-hover:hover {
   background-color: rgb(238, 230, 235);
 }
-
 
 .loged-in-background {
   background-color: white;
@@ -30,7 +27,6 @@
   -webkit-text-stroke: 2px black;
   width: auto;
 }
-
 
 .user-galleries {
   height: 800px;
@@ -123,7 +119,6 @@ ul li {
   justify-content: center;
 }
 
-
 .hovertext {
   position: relative;
   border-bottom: 1px dotted black;
@@ -152,7 +147,7 @@ ul li {
 }
 
 .zoom-box {
-  transition: transform .7s;
+  transition: transform 0.7s;
 }
 
 .zoom-box:hover {
@@ -160,68 +155,88 @@ ul li {
 }
 
 .wave {
-  animation-name: wave-animation;  
-  animation-duration: 2s;        
-  animation-iteration-count: 2; 
-  transform-origin: 70% 70%;   
+  animation-name: wave-animation;
+  animation-duration: 2s;
+  animation-iteration-count: 2;
+  transform-origin: 70% 70%;
   display: inline-block;
 }
 
 @keyframes wave-animation {
-    0% { transform: rotate( 0.0deg) }
-   10% { transform: rotate(14.0deg) }  
-   40% { transform: rotate(-4.0deg) }
-   50% { transform: rotate(10.0deg) }
-   60% { transform: rotate( 0.0deg) }  
-  100% { transform: rotate( 0.0deg) }
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(14deg);
+  }
+  40% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  60% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 .alert {
-
   width: fit-content;
 }
-
-
 
 @import url(https://fonts.googleapis.com/css?family=Amatic+SC);
 
 .museum-page {
-	color:rgb(231, 114, 208);
+  color: rgb(231, 114, 208);
 }
 
 p {
-	font-size: 2.5em;
-	display: table-cell; 
-	vertical-align: middle;
-	text-align: center;
-	opacity: 0;
+  font-size: 2.5em;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  opacity: 0;
 }
 
-.text{
+.text {
   bottom: 300px;
-	top: 130px; 
-	left: 30px; 
-	width:fit-content;
-	height:fit-content;
-	position:fixed;
-	display: table;
+  top: 130px;
+  left: 30px;
+  width: fit-content;
+  height: fit-content;
+  position: fixed;
+  display: table;
 }
 
-.t1{
-	animation: t-animation 3s;
+.t1 {
+  animation: t-animation 3s;
 }
-
 
 @keyframes t-animation {
-	0% {opacity: 0;}
-	30% {opacity: 1;}
-	70% {opacity: 1;}
-	100% {opacity: 0;}
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 @keyframes end-animation {
-	0% {opacity: 0;}
-	100% {opacity: 1;}
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .gallery-title-container {
@@ -229,10 +244,9 @@ p {
   justify-content: center;
 }
 
-
 .trash-cans {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   background-color: none;
 }
 
@@ -240,4 +254,3 @@ p {
   display: flex;
   justify-content: space-between;
 }
-

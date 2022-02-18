@@ -1,14 +1,10 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 
 <div class="col-12 register-title">
-    <div class="title-width">
-
-        NFTmuseo Registration
-    </div>
-    
+  <div class="title-width">NFTmuseo Registration</div>
 </div>
- 
-  <div class="loginwrapper">
+
+<div class="loginwrapper">
   <form
     action="{% url 'users_app:register' %}"
     method="POST"

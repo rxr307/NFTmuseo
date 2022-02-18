@@ -6,13 +6,13 @@ from django.http import HttpResponse
 from gallery_app.models import NewGallery, NewNFT
 from .forms import UserAuthForm, UserForm
 from django.contrib.auth import (authenticate, get_user_model,
-login as django_login,
-logout as django_logout )
+                                 login as django_login,
+                                 logout as django_logout)
 from django.contrib.auth.decorators import login_required
 
 
 def register(request):
-    ## this is creating an empty form when user lands on page
+    # this is creating an empty form when user lands on page
 
     form = UserAuthForm()
 
@@ -24,27 +24,25 @@ def register(request):
 
         return render(request, 'users/register.html', context)
 
-
     if request.method == 'POST':
 
-        ##creating a UserAuthForm with HTML form data 
+        # creating a UserAuthForm with HTML form data
 
         form = UserAuthForm(request.POST)
-        
+
         if form.is_valid():
-            ## commit false creates object, doesn't save it
+            # commit false creates object, doesn't save it
             new_user = form.save(commit=False)
-            
-            ## after you get form is valid, you get access to cleaned_data dictionary
+
+            # after you get form is valid, you get access to cleaned_data dictionary
             new_user.set_password(form.cleaned_data['password'])
 
-            #without this, you would just have a plain text password which won't allow you to log in ?? (I think)
+            # without this, you would just have a plain text password which won't allow you to log in ?? (I think)
 
-
-            ## now save the new user object to the database 
+            # now save the new user object to the database
             new_user.save()
 
-            ## redirect does same as HTTP Response Redirect, a short cut 
+            # redirect does same as HTTP Response Redirect, a short cut
 
             return redirect(reverse('users_app:login'))
 
@@ -56,7 +54,8 @@ def register(request):
                 'errors': ['User already exists! Please try again']
             }
 
-            return render (request, 'users/register.html', context)
+            return render(request, 'users/register.html', context)
+
 
 def login(request):
 
@@ -72,17 +71,17 @@ def login(request):
 
     if request.method == 'POST':
 
-        ## get form data from request
+        # get form data from request
 
-        form = request.POST 
+        form = request.POST
 
         username = form['username']
         password = form['password']
 
-        ## try to authenticate user
+        # try to authenticate user
         user = authenticate(request, username=username, password=password)
 
-        ## if credentials not valid, return error 
+        # if credentials not valid, return error
         if user is None:
             context = {
                 'form': UserAuthForm(),
@@ -91,21 +90,22 @@ def login(request):
 
             return render(request, 'users/login.html', context)
 
-        else: 
+        else:
 
             django_login(request, user)
 
             # redirect to users profile page
             return redirect(reverse('users_app:userprofile', kwargs={'username': user.username}))
 
+
 @login_required
 def userprofile(request, username):
     # find the user that just logged in
 
-
     user = get_object_or_404(get_user_model(), username=username)
 
-    user_galleries = NewGallery.objects.filter(user=user).order_by('-created_date')
+    user_galleries = NewGallery.objects.filter(
+        user=user).order_by('-created_date')
 
     gallery_count = NewGallery.objects.filter(user=user)
     number_of_galleries = 0
@@ -114,35 +114,36 @@ def userprofile(request, username):
             number_of_galleries += 1
 
     context = {
-        'user':user,
+        'user': user,
         'number_of_galleries': number_of_galleries,
         'user_galleries': user_galleries,
     }
 
     return render(request, 'users/userprofile.html', context)
 
+
 def logout(request):
     django_logout(request)
 
     return redirect(reverse('users_app:login'))
 
+
 def update(request, username):
 
     user = get_object_or_404(get_user_model(), username=username)
 
-    
     if request.method == 'GET':
 
         form = UserForm(instance=user)
 
         context = {
-        'form': form
+            'form': form
         }
 
         return render(request, 'users/update.html', context)
 
     elif request.method == 'POST':
-        #instance is form key word arugment for form, form uses User model, creates form around model
+        # instance is form key word arugment for form, form uses User model, creates form around model
         form = UserForm(request.POST, instance=user)
 
         updated_avatar = request.FILES.get('avatar')
@@ -151,14 +152,14 @@ def update(request, username):
             form.initial['avatar'] = updated_avatar
 
         if form.is_valid():
-            form.save() #update user instance with new names/pics/etc
+            form.save()  # update user instance with new names/pics/etc
 
             return redirect(reverse('users_app:userprofile', kwargs={'username': user.username}))
 
         else:
             context = {
-            'user': user,
-            'errors': ['Please try again']
+                'user': user,
+                'errors': ['Please try again']
             }
 
         return render(request, 'users/update.html', context)
