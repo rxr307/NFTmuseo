@@ -147,4 +147,10 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:8000',
 ] 
 
-CSRF_TRUSTED_ORIGINS = ['https://*.mydomain.com','http://*.127.0.0.1']
+CSRF_TRUSTED_ORIGINS = [
+    "https://domain.com",
+    "https://api.domain.com",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+    'http://localhost:8000',
+] 
