@@ -15,6 +15,7 @@ import json
 from datetime import datetime, tzinfo
 from django import template
 from django.utils.safestring import mark_safe
+from django.views.decorators.csrf import csrf_exempt
 
 
 # def newgallery(request, username):
@@ -103,7 +104,7 @@ def creategallery(request, username):
             return render(request, 'galleries/editgallery.html', context)
 
 
-@login_required
+
 def galleryview(request, username, gallery_id):
 
     if request.method == 'GET':
@@ -248,7 +249,7 @@ def delete_nft(request, pk):
     return redirect(reverse('users_app:userprofile', args=[request.user.username]))
 
 
-@login_required
+@csrf_exempt 
 def gallerylike(request, gallery_id):
 
     print('hello')
@@ -270,3 +271,7 @@ def gallerylike(request, gallery_id):
         'userliked': this_user in gallery_obj.gallery_like.all(),
         'numberlikes': gallery_obj.gallery_like.count(),
     })
+
+
+
+
