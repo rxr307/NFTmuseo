@@ -15,5 +15,5 @@ urlpatterns = [
     path('filteredmuseumview/', views.filteredmuseum, name='filteredmuseumview'),
     path('delete/<int:pk>/', views.delete, name='delete'),
     path('deletenft/<int:pk>/', views.delete_nft, name='deletenft'),
-    path('like/<int:gallery_id>', views.gallerylike, name='gallerylike')
+    path('gallerylike/<int:pic_id>', views.gallerylike, name='gallerylike'),
 ]

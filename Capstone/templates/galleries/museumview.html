@@ -100,18 +100,12 @@
           <div class="date">{{gallery.created_date|date:'m-d-Y'}}</div>
 
           <div class="flex-container">
-            <div class="like-button">
+            <div class="like">
               {% if request.user in gallery.gallery_like.all %}
-              <i
-                class="fa-solid fa-face-grin-hearts like"
-                id="like-{{gallery.id}}"
-              ></i>
-              {% else %}
-              <i
-                class="fa-solid fa-face-expressionless like"
-                id="like-{{gallery.id}}"
-              ></i>
-              {% endif %}
+              <i class="fas fa-heart my-auto text-danger like" id='like-{{gallery.id}}'></i>
+          {% else %}
+              <i class="far fa-heart my-auto like" id='like-{{gallery.id}}'></i>
+          {% endif %}
 
               <div id="like-count-{{gallery.id}}">
                 {{gallery.gallery_like.all.count}}

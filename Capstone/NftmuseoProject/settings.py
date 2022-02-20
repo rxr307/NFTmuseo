@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users_app',
     'gallery_app',
+    'corsheaders',
 
 
 ]
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -135,5 +137,14 @@ AUTH_USER_MODEL = 'users_app.User'
 ## where user goes if not logged in
 
 LOGIN_URL = '/users/login'
+
+
+CORS_ALLOWED_ORIGINS = [
+    "https://domain.com",
+    "https://api.domain.com",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+    'http://localhost:8000',
+] 
 
 CSRF_TRUSTED_ORIGINS = ['https://*.mydomain.com','http://*.127.0.0.1']
